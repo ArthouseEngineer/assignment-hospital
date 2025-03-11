@@ -12,6 +12,10 @@
    ```bash
    ./gradlew bootRun
    ```
+4.  Run Test
+ ```bash
+   ./gradlew test
+   ```
 
 ### API Endpoints
 
@@ -27,7 +31,6 @@
 
 - **Metrics Endpoint**:
     - `GET /api/metrics/hospital`: Get hospital metrics summary
-    - `GET /api/metrics/all`: Get all metrics
 
 ### API Documentation
 

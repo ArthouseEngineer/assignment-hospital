@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 public interface AppointmentMapper {
 
 
-    @Mapping(source = "patient", target = "patientDTO")
+    @Mapping(source = "patient", target = "patient")
     AppointmentDTO toDto(Appointment appointment);
 
 

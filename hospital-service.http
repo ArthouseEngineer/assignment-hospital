@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
   "patientName": "John Smith",
-  "ssn": "555-12-3456",
+  "ssn": "123-45-6789",
   "reasons": ["Annual Checkup", "Vaccination", "Blood Test"],
   "dates": [
     "2024-03-18T10:00:00",
@@ -31,7 +31,7 @@ GET {{baseUrl}}/hospital/appointments/reason/exact?reason={{appointmentReason}}
 Accept: application/json
 
 ### 4. Get Appointments Containing Reason Keyword
-GET {{baseUrl}}/hospital/appointments/reason/contains?keyword=Check
+GET {{baseUrl}}/hospital/appointments/reason/contains?keyword=Test
 Accept: application/json
 
 ### 5. Get Latest Appointment for Patient
@@ -39,7 +39,7 @@ GET {{baseUrl}}/hospital/appointments/latest/{{patientSsn}}
 Accept: application/json
 
 ### 6. Delete All Appointments for Patient
-DELETE {{baseUrl}}/hospital/appointments/patient/{{patientSsn}}
+DELETE {{baseUrl}}/hospital/appointments/patient/999-88-7777
 Accept: application/json
 
 ### 7. Create New Patient with Appointments (for testing)
@@ -60,17 +60,13 @@ Content-Type: application/json
 GET {{baseUrl}}/metrics/hospital
 Accept: application/json
 
-### 9. Get All Application Metrics
-GET {{baseUrl}}/metrics/all
-Accept: application/json
-
-### 10. Get Appointments for a Different Patient
+### 9. Get Appointments for a Different Patient
 # First create this patient using request #7
 # Then run this request
 GET {{baseUrl}}/hospital/appointments/latest/999-88-7777
 Accept: application/json
 
-### 11. Try Invalid Request (Missing Required Fields)
+### 10. Try Invalid Request (Missing Required Fields)
 POST {{baseUrl}}/hospital/appointments/bulk
 Content-Type: application/json
 
@@ -80,7 +76,7 @@ Content-Type: application/json
   // Missing reasons and dates
 }
 
-### 12. Try Invalid Date Format
+### 11. Try Invalid Date Format
 POST {{baseUrl}}/hospital/appointments/bulk
 Content-Type: application/json
 

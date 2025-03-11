@@ -53,7 +53,6 @@ public class HospitalService {
      * @throws BadRequestException if input data is invalid
      */
     @Transactional
-    @Counted(value = "hospital.service.bulk_create_appointments.count", description = "Count of bulk appointment creation operations")
     public List<AppointmentDTO> bulkCreateAppointments(
             String patientName,
             String ssn,

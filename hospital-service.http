@@ -51,8 +51,8 @@ Content-Type: application/json
   "ssn": "999-88-7777",
   "reasons": ["Initial Consultation", "Follow-up"],
   "dates": [
-    "{{$isoDateTime({{$timestamp + 86400000 * 3}})}}",
-    "{{$isoDateTime({{$timestamp + 86400000 * 10}})}}"
+    "2024-03-18T10:00:00",
+    "2024-03-25T11:00:00"
   ]
 }
 

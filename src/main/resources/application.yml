@@ -21,6 +21,7 @@ spring:
       idle-timeout: 300000
       max-lifetime: 1200000
 
+
   jpa:
     hibernate:
       ddl-auto: validate
@@ -46,7 +47,7 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     nl.gerimedica: INFO
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
+    console: "%magenta(%-30d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level)  ---  %cyan(%-77logger) : %m %kvp %n%rEx"
 
 management:
   endpoints:
@@ -68,4 +69,4 @@ springdoc:
     operationsSorter: method
     tagsSorter: alpha
     disable-swagger-default-url: true
-  packages-to-scan: nl.gerimedica.assignment.controller
+  packages-to-scan: nl.gerimedica.assignment.integration.rest

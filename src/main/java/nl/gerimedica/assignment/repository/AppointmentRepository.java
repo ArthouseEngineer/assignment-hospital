@@ -3,6 +3,7 @@ package nl.gerimedica.assignment.repository;
 import nl.gerimedica.assignment.entity.Appointment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,11 +17,13 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     /**
      * Find appointments by exact reason
      */
+    @EntityGraph(attributePaths = {"patient"})
     List<Appointment> findByReasonIgnoreCase(String reason);
 
     /**
      * Find appointments containing the reason keyword
      */
+    @EntityGraph(attributePaths = {"patient"})
     List<Appointment> findByReasonContainingIgnoreCase(String reasonKeyword);
 
     /**

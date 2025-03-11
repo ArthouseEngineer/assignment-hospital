@@ -1,0 +1,93 @@
+### Hospital Service API Requests
+### This file contains HTTP requests for testing the Hospital Service API
+### Use IntelliJ IDEA's HTTP Client to run these requests
+
+### Variables
+@baseUrl = http://localhost:8080/api
+@patientSsn = 123-45-6789
+@appointmentReason = Annual Checkup
+
+### 1. Get Patient by SSN
+GET {{baseUrl}}/hospital/patients/{{patientSsn}}
+Accept: application/json
+
+### 2. Create Bulk Appointments
+POST {{baseUrl}}/hospital/appointments/bulk
+Content-Type: application/json
+
+{
+  "patientName": "John Smith",
+  "ssn": "555-12-3456",
+  "reasons": ["Annual Checkup", "Vaccination", "Blood Test"],
+  "dates": [
+    "{{$isoDateTime({{$timestamp + 86400000 * 7}})}}",
+    "{{$isoDateTime({{$timestamp + 86400000 * 14}})}}",
+    "{{$isoDateTime({{$timestamp + 86400000 * 21}})}}"]
+}
+
+### 3. Get Appointments by Exact Reason
+GET {{baseUrl}}/hospital/appointments/reason/exact?reason={{appointmentReason}}
+Accept: application/json
+
+### 4. Get Appointments Containing Reason Keyword
+GET {{baseUrl}}/hospital/appointments/reason/contains?keyword=Check
+Accept: application/json
+
+### 5. Get Latest Appointment for Patient
+GET {{baseUrl}}/hospital/appointments/latest/{{patientSsn}}
+Accept: application/json
+
+### 6. Delete All Appointments for Patient
+DELETE {{baseUrl}}/hospital/appointments/patient/{{patientSsn}}
+Accept: application/json
+
+### 7. Create New Patient with Appointments (for testing)
+POST {{baseUrl}}/hospital/appointments/bulk
+Content-Type: application/json
+
+{
+  "patientName": "Test User",
+  "ssn": "999-88-7777",
+  "reasons": ["Initial Consultation", "Follow-up"],
+  "dates": [
+    "{{$isoDateTime({{$timestamp + 86400000 * 3}})}}",
+    "{{$isoDateTime({{$timestamp + 86400000 * 10}})}}"
+  ]
+}
+
+### 8. Get All Hospital Metrics
+GET {{baseUrl}}/metrics/hospital
+Accept: application/json
+
+### 9. Get All Application Metrics
+GET {{baseUrl}}/metrics/all
+Accept: application/json
+
+### 10. Get Appointments for a Different Patient
+# First create this patient using request #7
+# Then run this request
+GET {{baseUrl}}/hospital/appointments/latest/999-88-7777
+Accept: application/json
+
+### 11. Try Invalid Request (Missing Required Fields)
+POST {{baseUrl}}/hospital/appointments/bulk
+Content-Type: application/json
+
+{
+  "patientName": "Invalid Request",
+  "ssn": "111-22-3333"
+  // Missing reasons and dates
+}
+
+### 12. Try Invalid Date Format
+POST {{baseUrl}}/hospital/appointments/bulk
+Content-Type: application/json
+
+{
+  "patientName": "Date Format Test",
+  "ssn": "444-55-6666",
+  "reasons": ["Test Appointment"],
+  "dates": ["invalid-date-format"]
+}
+
+

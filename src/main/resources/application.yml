@@ -10,9 +10,9 @@ spring:
   application:
     name: hospital-management
   datasource:
-    url: jdbc:postgresql://localhost:5432/hospital
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: admin
+    password: nimda
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-timeout: 20000

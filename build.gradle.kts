@@ -66,9 +66,9 @@ liquibase {
 		register("main") {
 			arguments = mapOf(
 				"changeLogFile" to "src/main/resources/db/changelog/db.changelog-master.xml",
-				"url" to "jdbc:postgresql://localhost:5432/gerimedica_hospital",
-				"username" to "postgres",
-				"password" to "postgres"
+				"url" to "jdbc:postgresql://localhost:5432/postgres",
+				"username" to "admin",
+				"password" to "nimda"
 			)
 		}
 	}

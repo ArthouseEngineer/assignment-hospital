@@ -3,7 +3,6 @@ package nl.gerimedica.assignment.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.gerimedica.assignment.dto.ApiResponse;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

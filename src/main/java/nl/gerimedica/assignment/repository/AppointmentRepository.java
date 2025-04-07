@@ -14,16 +14,12 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-    // Check query in runtime GIN TOO
     /**
      * Find appointments by exact reason
      */
     @EntityGraph(attributePaths = {"patient"})
     List<Appointment> findByReasonIgnoreCase(String reason);
 
-
-
-    // Check query in runtime GIN TOO
     /**
      * Find appointments containing the reason keyword
      */

@@ -59,9 +59,6 @@ public class HospitalService {
             List<String> reasons,
             List<String> dates
     ) {
-        if (reasons.isEmpty() || dates.isEmpty()) {
-            throw new BadRequestException("Reasons and dates lists cannot be empty");
-        }
         Patient patient = patientRepository.findBySsn(ssn)
                 .map(existingPatient -> {
                     log.info("Using existing patient with SSN: {}", ssn);
@@ -95,20 +92,19 @@ public class HospitalService {
         patientRepository.save(patient);
         metricsService.recordAppointmentsCreated(createdAppointments.size());
 
-        createdAppointments.forEach(appt ->
-                log.info("""
+        return createdAppointments.stream()
+                .peek(appt ->
+                        log.info("""
                                 Created appointment:
                                 Reason: {}
                                 Date: {}
                                 Patient: {} (SSN: {})
                                 """,
-                        appt.getReason(),
-                        appt.getAppointmentDate(),
-                        appt.getPatient().getName(),
-                        appt.getPatient().getSsn())
-        );
-
-        return createdAppointments.stream()
+                                appt.getReason(),
+                                appt.getAppointmentDate(),
+                                appt.getPatient().getName(),
+                                appt.getPatient().getSsn())
+                )
                 .map(appointmentMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -190,7 +186,6 @@ public class HospitalService {
      * @return Latest appointment DTO or null if no appointments
      * @throws ResourceNotFoundException if patient not found
      */
-    @Transactional(readOnly = true)
     public AppointmentDTO findLatestAppointmentBySSN(String ssn) {
         if (!patientRepository.existsBySsn(ssn)) {
             throw new ResourceNotFoundException("Patient not found with SSN: " + ssn);

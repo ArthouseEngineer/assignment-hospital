@@ -2,10 +2,9 @@ CREATE SCHEMA IF NOT EXISTS hospital;
 
 -- Create patients table
 CREATE TABLE patients (
-                          id BIGSERIAL PRIMARY KEY,
+                          id BIGSERIAL PRIMARY KEY, -- WHY IT!
                           name VARCHAR(255) NOT NULL,
-                          ssn VARCHAR(50) NOT NULL,
-                          CONSTRAINT uk_patients_ssn UNIQUE (ssn)
+                          ssn VARCHAR(50) NOT NULL UNIQUE
 );
 
 -- Create appointments table

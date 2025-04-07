@@ -14,12 +14,16 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
+    // Check query in runtime GIN TOO
     /**
      * Find appointments by exact reason
      */
     @EntityGraph(attributePaths = {"patient"})
     List<Appointment> findByReasonIgnoreCase(String reason);
 
+
+
+    // Check query in runtime GIN TOO
     /**
      * Find appointments containing the reason keyword
      */
@@ -39,6 +43,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     /**
      * Find the latest appointment for a patient with the given SSN
      */
-    @Query("SELECT a FROM Appointment a WHERE a.patient.ssn = :ssn ORDER BY a.appointmentDate DESC")
+    @Query("SELECT a FROM Appointment a WHERE a.patient.ssn = :ssn ORDER BY a.appointmentDate LIMIT 1")
     Page<Appointment> findLatestByPatientSsn(@Param("ssn") String ssn, Pageable pageable);
 }

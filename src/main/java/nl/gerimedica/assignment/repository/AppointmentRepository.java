@@ -39,6 +39,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     /**
      * Find the latest appointment for a patient with the given SSN
      */
-    @Query("SELECT a FROM Appointment a WHERE a.patient.ssn = :ssn ORDER BY a.appointmentDate LIMIT 1")
-    Page<Appointment> findLatestByPatientSsn(@Param("ssn") String ssn, Pageable pageable);
+    @Query("SELECT a FROM Appointment a WHERE a.patient.ssn = :ssn ORDER BY a.appointmentDate DESC")
+    Appointment findLatestByPatientSsn(@Param("ssn") String ssn);
+
 }

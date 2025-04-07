@@ -44,7 +44,7 @@ public class Appointment {
     private String reason;
 
     @NotNull(message = "Appointment date is required")
-    @Column(nullable = false) // WHY can remove it?
+    @Column(nullable = false)
     private LocalDateTime appointmentDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
